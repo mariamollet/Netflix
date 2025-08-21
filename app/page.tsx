@@ -20,8 +20,8 @@ const MOVIES = [
     year: 2025,
     rating: 'TP',
     duration: '0:20',
-    poster:   'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600',
-    backdrop: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600',
+    poster:   '/profiles/Pabloold.jpg',
+    backdrop: '/profiles/Pabloteen.jpg',
     videoUrl: '/videos/IMG_0772.mov',
     description: 'Un chapuzón épico en verano.',
     tags: ['Verano', 'Familia']
@@ -32,8 +32,8 @@ const MOVIES = [
     year: 2025,
     rating: '12+',
     duration: '0:15',
-    poster:   'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600',
-    backdrop: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1600',
+    poster:   '/profiles/Pablobaby.jpg',
+    backdrop: '/profiles/Pablonow.jpg',
     videoUrl: '/videos/4c4c30cb-cd2d-4280-901e-cca377b7ec8d.mov',
     description: 'Luces y sombras en la ciudad.',
     tags: ['Acción', 'Ciudad']
