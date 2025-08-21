@@ -1,15 +1,15 @@
 'use client'
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useState } from 'react';
 
-/* ===================== CONFIGURA AQUÍ ===================== */
-const INTRO_VIDEO = '/videos/Netflix_Intro.mp4'; // tu intro local
+/* ===================== CONFIG ===================== */
+const INTRO_VIDEO = '/videos/Netflix_Intro.mp4'; // ya lo tienes en /public/videos
 
-// Perfiles: usa tus fotos si quieres (codifica espacios como %20)
+// Perfiles: deja Adult Pablo con tu foto local; los demás con imágenes de relleno
 const PROFILES = [
-  { id: 'baby',  name: 'Baby Pablo',  img: '/profiles/Pablobaby.jpg', allowed: false },
-  { id: 'teen',  name: 'Teen Pablo',  img: '/profiles/Pabloteen.jpg', allowed: false },
-  { id: 'adult', name: 'Adult Pablo', img: '/profiles/Pablonow.jpg',                                           allowed: true  },
-  { id: 'old',   name: 'Old Pablo',   img: '/profiles/Pabloold.jpg',   allowed: false },
+{ id: 'baby', name: 'Baby Pablo', img: '/profiles/Pablobaby.jpg', allowed: false },
+{ id: 'teen', name: 'Teen Pablo', img: '/profiles/Pabloteen.jpg', allowed: false },
+{ id: 'adult', name: 'Adult Pablo', img: '/profiles/Pablonow.jpg', allowed: true },
+{ id: 'old', name: 'Old Pablo', img: '/profiles/Pabloold.jpg', allowed: false },
 ];
 
 // Catálogo: usa tus vídeos locales .mov que ya subiste
@@ -39,9 +39,9 @@ const MOVIES = [
     tags: ['Acción', 'Ciudad']
   },
 ];
-/* ========================================================== */
+/* ================================================== */
 
-function ProfileCard({ p, onSelect }: any) {
+function ProfileCard({ p, onSelect }) {
   return (
     <button onClick={() => onSelect(p)} className="text-center">
       <img src={p.img} alt={p.name} className="mb-2 h-32 w-32 rounded object-cover" />
@@ -50,7 +50,7 @@ function ProfileCard({ p, onSelect }: any) {
   );
 }
 
-function ProfilesScreen({ onChoose }: any) {
+function ProfilesScreen({ onChoose }) {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-black text-white">
       <h1 className="mb-10 text-3xl font-bold">¿Quién eres? Elige tu perfil</h1>
@@ -64,7 +64,7 @@ function ProfilesScreen({ onChoose }: any) {
   );
 }
 
-function Intro({ onEnd }: any) {
+function Intro({ onEnd }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
       <video
@@ -97,7 +97,7 @@ function Navbar() {
   );
 }
 
-function Hero({ item, onPlay }: any) {
+function Hero({ item, onPlay }) {
   return (
     <section className="relative h-[70vh]">
       <img src={item.backdrop} className="absolute inset-0 h-full w-full object-cover" />
@@ -111,12 +111,12 @@ function Hero({ item, onPlay }: any) {
   );
 }
 
-function Row({ title, items, onOpen }: any) {
+function Row({ title, items, onOpen }) {
   return (
     <section className="px-6 py-6">
       <h2 className="mb-2 text-lg font-semibold text-white md:text-xl">{title}</h2>
       <div className="flex gap-3 overflow-x-auto">
-        {items.map((it: any) => (
+        {items.map((it) => (
           <div key={it.id} className="w-40 shrink-0 cursor-pointer" onClick={() => onOpen(it)}>
             <img src={it.poster} alt={it.title} className="rounded" />
             <div className="mt-1 truncate text-sm text-white/90">{it.title}</div>
@@ -127,7 +127,7 @@ function Row({ title, items, onOpen }: any) {
   );
 }
 
-function VideoModal({ item, onClose }: any) {
+function VideoModal({ item, onClose }) {
   if (!item) return null;
   const isMov = item.videoUrl?.toLowerCase().endsWith('.mov');
   return (
@@ -145,8 +145,8 @@ function VideoModal({ item, onClose }: any) {
 }
 
 export default function Page() {
-  const [stage, setStage] = useState<'intro' | 'profiles' | 'home'>('intro');
-  const [current, setCurrent] = useState<any>(null);
+  const [stage, setStage] = useState('intro'); // intro | profiles | home
+  const [current, setCurrent] = useState(null);
 
   const hero = MOVIES[0];
 
@@ -155,7 +155,7 @@ export default function Page() {
   if (stage === 'profiles')
     return (
       <ProfilesScreen
-        onChoose={(p: any) => (p.allowed ? setStage('home') : alert("Ese perfil no tiene contenido. Entra con 'Adult Pablo'"))}
+        onChoose={(p) => (p.allowed ? setStage('home') : alert("Ese perfil no tiene contenido. Entra con 'Adult Pablo'"))}
       />
     );
 
@@ -164,7 +164,7 @@ export default function Page() {
       <Navbar />
       <main className="pt-16">
         <Hero item={hero} onPlay={() => setCurrent(hero)} />
-        <Row title="Mi lista" items={MOVIES} onOpen={(it: any) => setCurrent(it)} />
+        <Row title="Mi lista" items={MOVIES} onOpen={(it) => setCurrent(it)} />
       </main>
       <VideoModal item={current} onClose={() => setCurrent(null)} />
     </div>
